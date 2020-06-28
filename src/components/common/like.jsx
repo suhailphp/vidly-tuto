@@ -1,16 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Like extends Component {
-  state = {};
-  render() {
-    return (
-      <i
-        style={{ cursor: "pointer" }}
-        onClick={this.props.onClick}
-        className={this.props.liked === true ? "fa fa-heart" : "fa fa-heart-o"}
-      ></i>
-    );
-  }
-}
+const Like = ({ liked, onClick }) => {
+  return (
+    <i
+      style={{ cursor: "pointer" }}
+      onClick={onClick}
+      className={liked === true ? "fa fa-heart" : "fa fa-heart-o"}
+    ></i>
+  );
+};
 
 export default Like;
