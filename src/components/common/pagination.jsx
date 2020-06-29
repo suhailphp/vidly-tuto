@@ -1,13 +1,13 @@
 import React from "react";
 
-const Pagination = ({ pageSize, totalRecords }) => {
+const Pagination = ({ pageSize, totalRecords, onPageChange }) => {
   let totalPage = Math.ceil(totalRecords / pageSize);
   console.log(totalPage);
   const items = [];
   for (let i = 1; i <= totalPage; i++) {
     items.push(
       <li key={i} className="page-item">
-        <a className="page-link" href="#">
+        <a className="page-link" href="#" onClick={() => onPageChange(i)}>
           {i}
         </a>
       </li>

@@ -21,6 +21,9 @@ class Movies extends Component {
     movies[index].liked = !movies[index].liked;
     this.setState(movies);
   };
+  handlePageChange = (pageNo) => {
+    console.log(pageNo);
+  };
   render() {
     let { length: count } = this.state.movies;
     if (count === 0) return <p>there are no Movies!</p>;
@@ -64,7 +67,11 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
-        <Pagination pageSize={this.state.pageSize} totalRecords={count} />
+        <Pagination
+          pageSize={this.state.pageSize}
+          totalRecords={count}
+          onPageChange={this.handlePageChange}
+        />
       </React.Fragment>
     );
   }
