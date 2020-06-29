@@ -3,7 +3,7 @@ import _ from "lodash";
 
 const Pagination = ({ pageSize, totalRecords, onPageChange }) => {
   let totalPage = Math.ceil(totalRecords / pageSize);
-  console.log(totalPage);
+  if (totalPage === 1) return null;
   const pages = _.range(1, totalPage + 1);
 
   return (
