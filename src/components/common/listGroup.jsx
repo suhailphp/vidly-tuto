@@ -11,10 +11,9 @@ const ListGroup = ({
     <ul className="list-group">
       {lists.map((list) => (
         <li
-          key={list[valueProperty]}
+          key={list[valueProperty] ? list[valueProperty] : "all"}
           className={
-            (selectedItem === null && list._id === "all") ||
-            list === selectedItem
+            (selectedItem === null && !list._id) || list === selectedItem
               ? "list-group-item active"
               : "list-group-item "
           }
