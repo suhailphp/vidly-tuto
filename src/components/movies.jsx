@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./common/like";
+import Pagination from "./common/pagination";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    pageNo: 1,
+    pageCount: 5,
   };
 
   handleDelete = (_id) => {
@@ -61,6 +64,11 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
+        <Pagination
+          pageCount={this.state.pageCount}
+          pageNo={this.state.pageCount}
+          totalRecords={this.state.movies.length}
+        />
       </React.Fragment>
     );
   }
