@@ -11,7 +11,7 @@ class Movies extends Component {
     movies: [],
     genres: [],
     pageSize: 4,
-    pageNumber: 1,
+    currentPage: 1,
     selectedGenre: null,
   };
 
@@ -36,18 +36,18 @@ class Movies extends Component {
     this.setState(movies);
   };
   handlePageChange = (pageNumber) => {
-    this.setState({ pageNumber: pageNumber });
+    this.setState({ currentPage: pageNumber });
   };
   handleGenreSelect = (selectedGenre) => {
     this.setState({
       selectedGenre: selectedGenre._id ? selectedGenre : null,
-      pageNumber: 1,
+      currentPage: 1,
     });
   };
 
   render() {
     let {
-      pageNumber,
+      currentPage,
       pageSize,
       selectedGenre,
       movies: allMovies,
@@ -56,7 +56,7 @@ class Movies extends Component {
     const filtered = selectedGenre
       ? allMovies.filter((movie) => selectedGenre._id === movie.genre._id)
       : allMovies;
-    const movies = paginate(filtered, pageNumber, pageSize);
+    const movies = paginate(filtered, currentPage, pageSize);
     const { length: count } = filtered;
 
     return (
@@ -111,7 +111,7 @@ class Movies extends Component {
             pageSize={pageSize}
             totalRecords={count}
             onPageChange={this.handlePageChange}
-            pageNumber={pageNumber}
+            pageNumber={currentPage}
           />
         </div>
       </div>
