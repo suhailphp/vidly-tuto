@@ -8,12 +8,19 @@ import ListGroup from "./common/listGroup";
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
-    genres: getGenres(),
+    movies: [],
+    genres: [],
     pageSize: 4,
     pageNumber: 1,
     selectedGenreID: "all",
   };
+
+  componentDidMount() {
+    this.setState({
+      movies: getMovies(),
+      genres: getGenres(),
+    });
+  }
 
   handleDelete = (_id) => {
     this.setState({
