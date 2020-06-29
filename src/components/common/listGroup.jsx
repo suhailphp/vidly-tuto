@@ -2,8 +2,8 @@ import React from "react";
 
 const ListGroup = ({
   lists,
-  selectedID,
-  onClick,
+  selectedItem,
+  onItemSelect,
   textProperty,
   valueProperty,
 }) => {
@@ -13,12 +13,12 @@ const ListGroup = ({
         <li
           key={list[valueProperty]}
           className={
-            selectedID === list[valueProperty]
+            list === selectedItem
               ? "list-group-item active"
               : "list-group-item "
           }
           style={{ cursor: "pointer" }}
-          onClick={() => onClick(list[valueProperty])}
+          onClick={() => onItemSelect(list)}
         >
           {list[textProperty]}
         </li>
@@ -31,5 +31,6 @@ ListGroup.defaultProps = {
   textProperty: "name",
   valueProperty: "_id",
 };
+//this is for setting default Props values
 
 export default ListGroup;
