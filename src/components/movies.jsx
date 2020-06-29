@@ -38,23 +38,18 @@ class Movies extends Component {
     this.setState({ pageNumber: pageNumber });
   };
   handleGenreSelect = (selectedGenre) => {
-    let movies = getMovies();
-    if (selectedGenre._id !== "all") {
-      movies = movies.filter((movie) => {
-        return movie.genre._id === selectedGenre._id;
-      });
-    }
     this.setState({
-      selectedGenre: selectedGenre,
+      selectedGenre: selectedGenre._id === "all" ? null : selectedGenre,
       pageNumber: 1,
-      movies: movies,
     });
   };
   render() {
-    const { length: count } = this.state.movies;
     let { pageNumber, pageSize, selectedGenre, movies: allMovies } = this.state;
-
-    const movies = paginate(allMovies, pageNumber, pageSize);
+    const filtered = selectedGenre
+      ? allMovies.filter((movie) => selectedGenre._id === movie.genre._id)
+      : allMovies;
+    const movies = paginate(filtered, pageNumber, pageSize);
+    const { length: count } = filtered;
     const lists = [{ _id: "all", name: "All Movies" }, ...this.state.genres];
 
     return (

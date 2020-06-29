@@ -13,6 +13,7 @@ const ListGroup = ({
         <li
           key={list[valueProperty]}
           className={
+            (selectedItem === null && list._id === "all") ||
             list === selectedItem
               ? "list-group-item active"
               : "list-group-item "
