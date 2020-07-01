@@ -45,6 +45,9 @@ class Movies extends Component {
       currentPage: 1,
     });
   };
+  handleSort = (field) => {
+    console.log(field);
+  };
 
   render() {
     let {
@@ -76,6 +79,7 @@ class Movies extends Component {
             movies={movies}
             onLike={this.handleLike}
             onDelete={this.handleDelete}
+            onSort={this.handleSort}
           />
           <Pagination
             pageSize={pageSize}
