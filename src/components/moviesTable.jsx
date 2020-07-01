@@ -5,11 +5,11 @@ const MoviesTable = ({ movies, onLike, onDelete, onSort }) => {
   return (
     <table className="table">
       <thead>
-        <tr>
-          <th onClick={() => onSort("Title")}>Title</th>
-          <th onClick={() => onSort("Genre")}>Genre</th>
-          <th onClick={() => onSort("Stock")}>Stock</th>
-          <th onClick={() => onSort("Rate")}>Rate</th>
+        <tr style={{ cursor: "pointer" }}>
+          <th onClick={() => onSort("title")}>Title</th>
+          <th onClick={() => onSort("genre.name")}>Genre</th>
+          <th onClick={() => onSort("numberInStock")}>Stock</th>
+          <th onClick={() => onSort("dailyRentalRate")}>Rate</th>
           <th></th>
           <th></th>
         </tr>
