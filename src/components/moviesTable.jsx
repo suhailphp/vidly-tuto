@@ -5,14 +5,29 @@ import TableBody from "./common/tableBody";
 
 class MoviesTable extends Component {
   render() {
-    let { movies, onLike, onDelete, sortColumn, onSort } = this.props;
+    let { movies, sortColumn, onSort } = this.props;
     let columns = [
       { label: "Title", path: "title" },
       { label: "Genre", path: "genre.name" },
       { label: "Stock", path: "numberInStock" },
       { label: "Rate", path: "dailyRentalRate" },
-      { key: "like" },
-      { key: "delete" },
+      {
+        key: "like",
+        content: (movie) => (
+          <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
+        ),
+      },
+      {
+        key: "delete",
+        content: (movie) => (
+          <button
+            onClick={() => this.props.onDelete(movie._id)}
+            className="btn btn-danger btn-small"
+          >
+            Delete
+          </button>
+        ),
+      },
     ];
     return (
       <table className="table">

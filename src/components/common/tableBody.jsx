@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import _ from "lodash";
 
 class TableBody extends Component {
+  renderCell = (item, column) => {
+    if (column.content) {
+      return column.content(item);
+    } else {
+      return _.get(item, column.path);
+    }
+  };
   render() {
     let { columns, data } = this.props;
     return (
@@ -10,7 +17,7 @@ class TableBody extends Component {
           <tr key={item._id}>
             {columns.map((column) => (
               <td key={item._id + (column.label || column.key)}>
-                {_.get(item, column.path)}
+                {this.renderCell(item, column)}
               </td>
             ))}
           </tr>
