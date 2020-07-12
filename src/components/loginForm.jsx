@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submited");
+  };
   render() {
     return (
       <div>
         <h1>Login</h1>
-        <form action="">
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="userName">User Name</label>
             <input
