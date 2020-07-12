@@ -11,7 +11,7 @@ class MoviesTable extends Component {
         label: "Title",
         path: "title",
         content: (movie) => (
-          <Link to={"movies/" + movie._id}>{movie.title}</Link>
+          <Link to={`movies/${movie._id}`}>{movie.title}</Link>
         ),
       },
       { label: "Genre", path: "genre.name" },
