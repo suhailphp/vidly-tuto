@@ -24,6 +24,9 @@ class LoginForm extends Component {
               id="password"
             />
           </div>
+          <div className="form-group">
+            <button className="btn btn-primary">Login</button>
+          </div>
         </form>
       </div>
     );
