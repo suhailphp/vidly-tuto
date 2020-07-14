@@ -10,7 +10,7 @@ class LoginForm extends Component {
   };
   handleChange = (e) => {
     let account = { ...this.state.account };
-    account.userName = e.currentTarget.value;
+    account[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ account });
   };
   render() {
@@ -36,6 +36,8 @@ class LoginForm extends Component {
               className="form-control"
               name="password"
               id="password"
+              value={this.state.account.userName}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group">
