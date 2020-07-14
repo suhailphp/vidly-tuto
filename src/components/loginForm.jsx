@@ -9,6 +9,7 @@ class LoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let errors = this.validate();
+    this.setState({ errors: errors || {} });
     if (errors) {
       console.log(errors);
       return false;
@@ -24,7 +25,7 @@ class LoginForm extends Component {
     if (account.password.trim() === "") {
       errors.password = "Password filed required ";
     }
-    return errors;
+    return Object.keys(errors).length === 0 ? null : errors;
   };
   handleChange = ({ currentTarget: input }) => {
     let account = { ...this.state.account };
@@ -32,7 +33,7 @@ class LoginForm extends Component {
     this.setState({ account });
   };
   render() {
-    let { account } = this.state;
+    let { account, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
@@ -42,6 +43,7 @@ class LoginForm extends Component {
             name="userName"
             value={account.userName}
             label="User Name"
+            error={errors.userName}
           />
 
           <Input
@@ -50,6 +52,7 @@ class LoginForm extends Component {
             value={account.password}
             label="Password"
             type="password"
+            error={errors.password}
           />
           <div className="form-group">
             <button className="btn btn-primary">Login</button>
