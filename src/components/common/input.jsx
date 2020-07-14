@@ -1,12 +1,12 @@
 import React from "react";
 
-const Input = ({ label, name, value, onChange }) => {
+const Input = ({ label, name, value, onChange, type }) => {
   return (
     <div className="form-group">
       <label htmlFor="{id}">{label}</label>
       <input
-        type="text"
         className="form-control"
+        type={type}
         name={name}
         id={name}
         value={value}
@@ -16,4 +16,7 @@ const Input = ({ label, name, value, onChange }) => {
   );
 };
 
+Input.Input = {
+  type: "text",
+};
 export default Input;
