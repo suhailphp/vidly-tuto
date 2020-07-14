@@ -34,7 +34,6 @@ class LoginForm extends Component {
             label="Password"
             type="password"
           />
-
           <div className="form-group">
             <button className="btn btn-primary">Login</button>
           </div>
