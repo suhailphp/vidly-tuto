@@ -27,9 +27,9 @@ class LoginForm extends Component {
     }
     return Object.keys(errors).length === 0 ? null : errors;
   };
-  vadiateProperty = (input) => {
-    if (input.value.trim() === "") {
-      return input.name + " is required";
+  vadiateProperty = ({ name, value }) => {
+    if (value.trim() === "") {
+      return name + " is required";
     } else return null;
   };
   handleChange = ({ currentTarget: input }) => {
