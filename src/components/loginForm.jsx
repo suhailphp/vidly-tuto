@@ -27,10 +27,20 @@ class LoginForm extends Component {
     }
     return Object.keys(errors).length === 0 ? null : errors;
   };
+  vadiateProperty = (input) => {
+    if (input.value.trim() === "") {
+      return input.name + " is required";
+    } else return null;
+  };
   handleChange = ({ currentTarget: input }) => {
+    let errors = { ...this.state.errors };
+    let errorMessage = this.vadiateProperty(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
+
     let account = { ...this.state.account };
     account[input.name] = input.value;
-    this.setState({ account });
+    this.setState({ account, errors });
   };
   render() {
     let { account, errors } = this.state;
