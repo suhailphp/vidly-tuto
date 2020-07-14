@@ -8,8 +8,9 @@ class LoginForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.errors) {
-      console.log(this.state.errors);
+    let errors = this.validate();
+    if (errors) {
+      console.log(errors);
       return false;
     }
     console.log("Submitd");
@@ -27,11 +28,8 @@ class LoginForm extends Component {
   };
   handleChange = ({ currentTarget: input }) => {
     let account = { ...this.state.account };
-
-    let errors = this.validate();
-    console.log(errors);
     account[input.name] = input.value;
-    this.setState({ account, errors });
+    this.setState({ account });
   };
   render() {
     let { account } = this.state;
