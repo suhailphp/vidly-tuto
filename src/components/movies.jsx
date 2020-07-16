@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import Pagination from "./common/pagination";
@@ -87,12 +88,9 @@ class Movies extends Component {
         </div>
 
         <div className="col-10">
-          <button
-            onClick={() => this.props.history.push("/movies/new")}
-            className="btn btn-success"
-          >
+          <Link to="/movies/new" className="btn btn-success">
             New Move
-          </button>
+          </Link>
           <p>Total {totalCount} Records</p>
           <Moviestable
             movies={movies}
