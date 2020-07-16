@@ -25,17 +25,10 @@ class LoginForm extends Component {
     let result = Joi.validate(this.state.account, this.schema, {
       abortEarly: false,
     });
-    console.log(result);
-
-    let { account } = this.state;
+    if (!result.error) return null;
     let errors = {};
-    if (account.userName.trim() === "") {
-      errors.userName = "UserName is required ";
-    }
-    if (account.password.trim() === "") {
-      errors.password = "Password filed required ";
-    }
-    return Object.keys(errors).length === 0 ? null : errors;
+    for (let item of result.error.details) errors[item.path[0]] = item.message;
+    return errors;
   };
   vadiateProperty = ({ name, value }) => {
     if (value.trim() === "") {
