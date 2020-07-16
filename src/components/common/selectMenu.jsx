@@ -14,8 +14,8 @@ const SelectMenu = ({ name, label, error, items, onChange, value }) => {
         {items.map((item) => (
           <option
             key={item._id}
-            value={item}
-            selected={value._id === item._id ? "selected" : ""}
+            value={item.id}
+            selected={value === item._id ? "selected" : ""}
           >
             {item.name}
           </option>
