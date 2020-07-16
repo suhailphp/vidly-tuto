@@ -39,11 +39,7 @@ class LoginForm extends Form {
             type="password"
             error={errors.password}
           />
-          <div className="form-group">
-            <button disabled={this.validate()} className="btn btn-primary">
-              Login
-            </button>
-          </div>
+          {this.renderButton("Login")}
         </form>
       </div>
     );

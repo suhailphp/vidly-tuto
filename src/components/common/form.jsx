@@ -39,6 +39,15 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data, errors });
   };
+  renderButton = (label) => {
+    return (
+      <div className="form-group">
+        <button disabled={this.validate()} className="btn btn-primary">
+          {label}
+        </button>
+      </div>
+    );
+  };
 }
 
 export default Form;
