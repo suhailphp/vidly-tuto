@@ -13,7 +13,7 @@ const SelectMenu = ({ name, label, error, items, onChange, value }) => {
       >
         <option value="">Select One</option>
         {items.map((item) => (
-          <option key={item._id} value={item.id}>
+          <option key={item._id} value={item._id}>
             {item.name}
           </option>
         ))}

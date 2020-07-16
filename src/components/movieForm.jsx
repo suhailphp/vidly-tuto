@@ -14,7 +14,7 @@ class MovieForm extends Form {
       dailyRentalRate: "",
       liked: false,
     },
-    genres: {},
+    genres: [],
     errors: {},
   };
   schema = {
@@ -27,16 +27,16 @@ class MovieForm extends Form {
   };
   componentDidMount() {
     if (this.props.match.params._id !== "new") {
-      let data = getMovie(this.props.match.params._id);
-
+      let movies = getMovie(this.props.match.params._id);
+      if (!movies) return this.props.history.replace("/not-found");
       this.setState({
         data: {
-          _id: data._id,
-          title: data.title,
-          genreId: data.genre._id,
-          numberInStock: data.dailyRentalRate,
-          dailyRentalRate: data.numberInStock,
-          liked: data.liked,
+          _id: movies._id,
+          title: movies.title,
+          genreId: movies.genre._id,
+          numberInStock: movies.dailyRentalRate,
+          dailyRentalRate: movies.numberInStock,
+          liked: movies.liked,
         },
       });
     }
