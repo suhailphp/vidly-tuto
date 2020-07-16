@@ -8,7 +8,7 @@ class LoginForm extends Component {
     errors: {},
   };
   schema = {
-    userName: Joi.string().required().label("User Name"),
+    userName: Joi.string().required().min(3).max(10).label("User Name"),
     password: Joi.string().required().label("Passowrd"),
   };
   handleSubmit = (e) => {
@@ -30,9 +30,10 @@ class LoginForm extends Component {
     return errors;
   };
   vadiateProperty = ({ name, value }) => {
-    if (value.trim() === "") {
-      return name + " is required";
-    } else return null;
+    let obj = { [name]: value };
+    let schema = { [name]: this.schema[name] };
+    let { error } = Joi.validate(obj, schema);
+    return error ? error.details[0].message : null;
   };
   handleChange = ({ currentTarget: input }) => {
     let errors = { ...this.state.errors };
@@ -67,7 +68,9 @@ class LoginForm extends Component {
             error={errors.password}
           />
           <div className="form-group">
-            <button className="btn btn-primary">Login</button>
+            <button disabled={this.validate()} className="btn btn-primary">
+              Login
+            </button>
           </div>
         </form>
       </div>
