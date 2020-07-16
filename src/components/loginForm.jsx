@@ -22,12 +22,11 @@ class LoginForm extends Component {
     console.log("Submitd");
   };
   validate = () => {
-    let result = Joi.validate(this.state.account, this.schema, {
-      abortEarly: false,
-    });
-    if (!result.error) return null;
+    let options = { abortEarly: false };
+    let { error } = Joi.validate(this.state.account, this.schema, options);
+    if (!error) return null;
     let errors = {};
-    for (let item of result.error.details) errors[item.path[0]] = item.message;
+    for (let item of error.details) errors[item.path[0]] = item.message;
     return errors;
   };
   vadiateProperty = ({ name, value }) => {
