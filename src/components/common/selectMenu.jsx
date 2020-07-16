@@ -9,14 +9,11 @@ const SelectMenu = ({ name, label, error, items, onChange, value }) => {
         name={name}
         id={name}
         onChange={onChange}
+        defaultValue={value}
       >
         <option value="">Select One</option>
         {items.map((item) => (
-          <option
-            key={item._id}
-            value={item.id}
-            selected={value === item._id ? "selected" : ""}
-          >
+          <option key={item._id} value={item.id}>
             {item.name}
           </option>
         ))}

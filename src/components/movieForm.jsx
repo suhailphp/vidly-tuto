@@ -1,7 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { getMovie } from "../services/fakeMovieService";
+import { getMovie, saveMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 
 class MovieForm extends Form {
@@ -21,8 +21,8 @@ class MovieForm extends Form {
     _id: Joi.string().allow("", null),
     title: Joi.string().required(),
     genreId: Joi.string().required(),
-    numberInStock: Joi.string().required(),
-    dailyRentalRate: Joi.string().required(),
+    numberInStock: Joi.number().required(),
+    dailyRentalRate: Joi.number().required(),
     liked: Joi.boolean(),
   };
   componentDidMount() {
@@ -44,8 +44,9 @@ class MovieForm extends Form {
     this.setState({ genres });
   }
   doSubmit() {
-    console.log(this.state.data.genres);
-    return false;
+    console.log(this.state.data);
+    saveMovie(this.state.data);
+    this.props.history.replace("/movies");
   }
   render() {
     return (
