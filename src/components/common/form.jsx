@@ -64,7 +64,7 @@ class Form extends Component {
       />
     );
   }
-  renderSelectMenu(name, label, items) {
+  renderSelectMenu(name, label, options) {
     let { data, errors } = this.state;
     return (
       <SelectMenu
@@ -73,7 +73,7 @@ class Form extends Component {
         value={data[name]}
         label={label}
         error={errors[name]}
-        items={items}
+        options={options}
       />
     );
   }

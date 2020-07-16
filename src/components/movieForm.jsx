@@ -26,9 +26,13 @@ class MovieForm extends Form {
     liked: Joi.boolean(),
   };
   componentDidMount() {
+    let genres = getGenres();
+    this.setState({ genres });
     if (this.props.match.params._id !== "new") {
       let movies = getMovie(this.props.match.params._id);
       if (!movies) return this.props.history.replace("/not-found");
+
+      //console.log(movies);
       this.setState({
         data: {
           _id: movies._id,
@@ -40,8 +44,6 @@ class MovieForm extends Form {
         },
       });
     }
-    let genres = getGenres();
-    this.setState({ genres });
   }
   doSubmit() {
     console.log(this.state.data);
@@ -54,7 +56,7 @@ class MovieForm extends Form {
         <h1>Movie Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInputField("title", "Movie Title")}
-          {this.renderSelectMenu("genreId", "Genre", getGenres())}
+          {this.renderSelectMenu("genreId", "Genre", this.state.genres)}
           {this.renderInputField("numberInStock", "Number in stock")}
           {this.renderInputField("dailyRentalRate", "Daily rental rate")}
           {this.renderButton("Save Movie")}

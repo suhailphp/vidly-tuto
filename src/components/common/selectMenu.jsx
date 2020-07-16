@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectMenu = ({ name, label, error, items, onChange, value }) => {
+const SelectMenu = ({ name, label, error, options, onChange, value }) => {
   return (
     <div className="form-group">
       <label htmlFor="{id}">{label}</label>
@@ -9,12 +9,12 @@ const SelectMenu = ({ name, label, error, items, onChange, value }) => {
         name={name}
         id={name}
         onChange={onChange}
-        defaultValue={value}
+        value={value}
       >
         <option value="">Select One</option>
-        {items.map((item) => (
-          <option key={item._id} value={item._id}>
-            {item.name}
+        {options.map((option) => (
+          <option key={option._id} value={option._id}>
+            {option.name}
           </option>
         ))}
       </select>
