@@ -8,8 +8,8 @@ class LoginForm extends Component {
     errors: {},
   };
   schema = {
-    userName: Joi.string().required(),
-    password: Joi.string().required(),
+    userName: Joi.string().required().label("User Name"),
+    password: Joi.string().required().label("Passowrd"),
   };
   handleSubmit = (e) => {
     e.preventDefault();
