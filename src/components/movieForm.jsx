@@ -18,10 +18,12 @@ class MovieForm extends Form {
     errors: {},
   };
   schema = {
+    _id: Joi.string().allow("", null),
     title: Joi.string().required(),
     genre: Joi.object().required(),
     numberInStock: Joi.string().required(),
     dailyRentalRate: Joi.string().required(),
+    liked: Joi.boolean(),
   };
   componentDidMount() {
     if (this.props.match.params._id !== "new") {
@@ -31,11 +33,15 @@ class MovieForm extends Form {
     let genres = getGenres();
     this.setState({ genres });
   }
+  doSubmit() {
+    console.log(this.state.data.genres);
+    return false;
+  }
   render() {
     return (
       <div>
-        <h1>Movie id is {this.props.match.params._id}</h1>
-        <form onSubmit={this.hancleSubmit}>
+        <h1>Movie Form</h1>
+        <form onSubmit={this.handleSubmit}>
           {this.renderInputField("title", "Movie Title")}
           {this.renderSelectMenu("genre", "Genre", getGenres())}
           {this.renderInputField("numberInStock", "Number in stock")}
