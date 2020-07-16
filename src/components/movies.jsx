@@ -30,7 +30,7 @@ class Movies extends Component {
 
   handleSearch = ({ currentTarget: input }) => {
     let search = input.value;
-    this.setState({ search, selectedGenre: null });
+    this.setState({ search, selectedGenre: null, currentPage: 1 });
   };
 
   handleDelete = (_id) => {
@@ -116,6 +116,7 @@ class Movies extends Component {
             value={search}
             label=""
             onChange={this.handleSearch}
+            placeholder="Search"
           />
           <Moviestable
             movies={movies}
