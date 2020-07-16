@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
+import SelectMenu from "./selectMenu";
 
 class Form extends Component {
   state = {
@@ -59,6 +60,19 @@ class Form extends Component {
         label={label}
         type={type}
         error={errors[name]}
+      />
+    );
+  }
+  renderSelectMenu(name, label, items) {
+    let { data, errors } = this.state;
+    return (
+      <SelectMenu
+        onChange={this.handleChange}
+        name={name}
+        value={data[name]}
+        label={label}
+        error={errors[name]}
+        items={items}
       />
     );
   }

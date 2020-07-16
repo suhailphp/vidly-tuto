@@ -87,6 +87,12 @@ class Movies extends Component {
         </div>
 
         <div className="col-10">
+          <button
+            onClick={() => this.props.history.push("/movies/new")}
+            className="btn btn-success"
+          >
+            New Move
+          </button>
           <p>Total {totalCount} Records</p>
           <Moviestable
             movies={movies}
