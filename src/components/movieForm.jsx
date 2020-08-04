@@ -4,6 +4,7 @@ import Form from "./common/form";
 
 import { getMovie, saveMovie } from "../services/movieService";
 import { getGenres } from "../services/genreService";
+import { toast } from "react-toastify";
 
 class MovieForm extends Form {
   state = {
@@ -46,9 +47,10 @@ class MovieForm extends Form {
       }
     }
   }
-  doSubmit() {
+  async doSubmit() {
     //console.log(this.state.data);
-    saveMovie(this.state.data);
+    await saveMovie(this.state.data);
+    toast.success("Movie updated");
     this.props.history.replace("/movies");
   }
   render() {
