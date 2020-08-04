@@ -28,18 +28,22 @@ class MovieForm extends Form {
     let { data: genres } = await getGenres();
     this.setState({ genres });
     if (this.props.match.params._id !== "new") {
-      let { data: movies } = await getMovie(this.props.match.params._id);
-
-      if (!movies) return this.props.history.replace("/not-found");
-      this.setState({
-        data: {
-          movieID: movies.movieID,
-          title: movies.title,
-          genreID: movies.genreID,
-          numberInStock: movies.numberInStock,
-          dailyRentalRate: movies.dailyRentalRate,
-        },
-      });
+      try {
+        let { data: movies } = await getMovie(this.props.match.params._id);
+        this.setState({
+          data: {
+            movieID: movies.movieID,
+            title: movies.title,
+            genreID: movies.genreID,
+            numberInStock: movies.numberInStock,
+            dailyRentalRate: movies.dailyRentalRate,
+          },
+        });
+      } catch (ex) {
+        if (ex.response && ex.response.status === 404) {
+          this.props.history.replace("/not-found");
+        }
+      }
     }
   }
   doSubmit() {
