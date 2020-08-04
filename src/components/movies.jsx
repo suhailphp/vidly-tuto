@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getMovies } from "../services/movieService";
+import { getMovies, deleteMovie } from "../services/movieService";
 import { getGenres } from "../services/genreService";
 import Pagination from "./common/pagination";
 import paginate from "../utils/paginate";
@@ -25,7 +25,7 @@ class Movies extends Component {
   async componentDidMount() {
     let { data: movies } = await getMovies();
     let { data: genres } = await getGenres();
-    console.log(movies);
+    //console.log(movies);
     genres = [{ genreID: "", name: "All Movies" }, ...genres];
     this.setState({
       movies: movies,
@@ -38,11 +38,20 @@ class Movies extends Component {
     this.setState({ search, selectedGenre: null, currentPage: 1 });
   };
 
-  handleDelete = (_id) => {
+  handleDelete = async (movieID) => {
+    let originalMovies = this.state.movies;
     this.setState({
-      movies: this.state.movies.filter((movie) => movie._id !== _id),
+      movies: this.state.movies.filter((movie) => movie.movieID !== movieID),
     });
-    toast.error("Movie Deleted");
+    try {
+      await deleteMovie(movieID);
+      toast("movie deleted");
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        toast.error("Movie already deleted");
+        this.setState({ movies: originalMovies });
+      }
+    }
   };
 
   handleLike = (movie) => {

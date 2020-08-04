@@ -21,3 +21,7 @@ export function saveMovie(movie) {
   // }
   // return movieInDb;
 }
+
+export function deleteMovie(id) {
+  return http.delete(ApiEndPoint + "movies/" + id);
+}

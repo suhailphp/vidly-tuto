@@ -14,7 +14,6 @@ axios.interceptors.response.use(
       error.response.status < 500;
     if (!expectedError) {
       toast.error("Unexpected error occured, please try again");
-      //console.log("unexpectedError", error);
       logger.log(error);
     }
     return Promise.reject(error);
