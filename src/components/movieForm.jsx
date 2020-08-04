@@ -20,9 +20,9 @@ class MovieForm extends Form {
     errors: {},
   };
   schema = {
-    movieID: Joi.string().allow("", null),
+    movieID: Joi.number().allow("", null),
     title: Joi.string().required(),
-    genreID: Joi.string().required(),
+    genreID: Joi.number().required(),
     numberInStock: Joi.number().required(),
     dailyRentalRate: Joi.number().required(),
   };
