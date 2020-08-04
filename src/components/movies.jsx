@@ -24,10 +24,13 @@ class Movies extends Component {
     search: "",
   };
 
-  componentDidMount() {
-    const genres = [{ _id: "", name: "All Movies" }, ...getGenres()];
+  async componentDidMount() {
+    let movies = await http.get(config.ApiEndPoint + "movies");
+    let genres = await http.get(config.ApiEndPoint + "genre");
+    console.log(movies);
+    genres = [{ genreID: "", name: "All Movies" }, ...genres.data];
     this.setState({
-      movies: getMovies(),
+      movies: movies.data,
       genres: genres,
     });
   }
@@ -108,6 +111,7 @@ class Movies extends Component {
             lists={genres}
             selectedItem={selectedGenre}
             onItemSelect={this.handleGenreSelect}
+            valueProperty="genreID"
           />
         </div>
 

@@ -10,13 +10,13 @@ class TableBody extends Component {
     }
   };
   render() {
-    let { columns, data } = this.props;
+    let { columns, data, valueProperty } = this.props;
     return (
       <tbody>
         {data.map((item) => (
-          <tr key={item._id}>
+          <tr key={item[valueProperty]}>
             {columns.map((column) => (
-              <td key={item._id + (column.label || column.key)}>
+              <td key={item[valueProperty] + (column.label || column.key)}>
                 {this.renderCell(item, column)}
               </td>
             ))}
@@ -26,5 +26,7 @@ class TableBody extends Component {
     );
   }
 }
-
+TableBody.defaultProps = {
+  valueProperty: "movieID",
+};
 export default TableBody;
