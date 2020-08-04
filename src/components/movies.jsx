@@ -9,6 +9,10 @@ import Moviestable from "./moviesTable";
 import _ from "lodash";
 import Input from "./common/input";
 
+import http from "../services/httpService";
+import config from "../config.json";
+import { toast } from "react-toastify";
+
 class Movies extends Component {
   state = {
     movies: [],
@@ -37,6 +41,7 @@ class Movies extends Component {
     this.setState({
       movies: this.state.movies.filter((movie) => movie._id !== _id),
     });
+    toast.error("Movie Deleted");
   };
 
   handleLike = (movie) => {
