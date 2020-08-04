@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getMovies } from "../services/fakeMovieService";
-import { getGenres } from "../services/fakeGenreService";
+import { getMovies } from "../services/movieService";
+import { getGenres } from "../services/genreService";
 import Pagination from "./common/pagination";
 import paginate from "../utils/paginate";
 import ListGroup from "./common/listGroup";
@@ -9,8 +9,6 @@ import Moviestable from "./moviesTable";
 import _ from "lodash";
 import Input from "./common/input";
 
-import http from "../services/httpService";
-import config from "../config.json";
 import { toast } from "react-toastify";
 
 class Movies extends Component {
@@ -25,12 +23,12 @@ class Movies extends Component {
   };
 
   async componentDidMount() {
-    let movies = await http.get(config.ApiEndPoint + "movies");
-    let genres = await http.get(config.ApiEndPoint + "genre");
-    //console.log(movies);
-    genres = [{ genreID: "", name: "All Movies" }, ...genres.data];
+    let { data: movies } = await getMovies();
+    let { data: genres } = await getGenres();
+    console.log(movies);
+    genres = [{ genreID: "", name: "All Movies" }, ...genres];
     this.setState({
-      movies: movies.data,
+      movies: movies,
       genres: genres,
     });
   }

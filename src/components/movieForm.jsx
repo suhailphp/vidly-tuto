@@ -1,11 +1,9 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { getMovie, saveMovie } from "../services/fakeMovieService";
-import { getGenres } from "../services/fakeGenreService";
 
-import http from "../services/httpService";
-import config from "../config.json";
+import { getMovie, saveMovie } from "../services/movieService";
+import { getGenres } from "../services/genreService";
 
 class MovieForm extends Form {
   state = {
@@ -27,15 +25,12 @@ class MovieForm extends Form {
     dailyRentalRate: Joi.number().required(),
   };
   async componentDidMount() {
-    let genres = await http.get(config.ApiEndPoint + "genre");
-    this.setState({ genres: genres.data });
+    let { data: genres } = await getGenres();
+    this.setState({ genres });
     if (this.props.match.params._id !== "new") {
-      let movies = await http.get(
-        config.ApiEndPoint + "movies/" + this.props.match.params._id
-      );
+      let { data: movies } = await getMovie(this.props.match.params._id);
 
       if (!movies) return this.props.history.replace("/not-found");
-      movies = movies.data;
       this.setState({
         data: {
           movieID: movies.movieID,
