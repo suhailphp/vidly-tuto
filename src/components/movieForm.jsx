@@ -4,49 +4,51 @@ import Form from "./common/form";
 import { getMovie, saveMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 
+import http from "../services/httpService";
+import config from "../config.json";
+
 class MovieForm extends Form {
   state = {
     data: {
-      _id: null,
+      movieID: null,
       title: "",
-      genreId: "",
+      genreID: "",
       numberInStock: "",
       dailyRentalRate: "",
-      liked: false,
     },
     genres: [],
     errors: {},
   };
   schema = {
-    _id: Joi.string().allow("", null),
+    movieID: Joi.string().allow("", null),
     title: Joi.string().required(),
-    genreId: Joi.string().required(),
+    genreID: Joi.string().required(),
     numberInStock: Joi.number().required(),
     dailyRentalRate: Joi.number().required(),
-    liked: Joi.boolean(),
   };
-  componentDidMount() {
-    let genres = getGenres();
-    this.setState({ genres });
+  async componentDidMount() {
+    let genres = await http.get(config.ApiEndPoint + "genre");
+    this.setState({ genres: genres.data });
     if (this.props.match.params._id !== "new") {
-      let movies = getMovie(this.props.match.params._id);
-      if (!movies) return this.props.history.replace("/not-found");
+      let movies = await http.get(
+        config.ApiEndPoint + "movies/" + this.props.match.params._id
+      );
 
-      //console.log(movies);
+      if (!movies) return this.props.history.replace("/not-found");
+      movies = movies.data;
       this.setState({
         data: {
-          _id: movies._id,
+          movieID: movies.movieID,
           title: movies.title,
-          genreId: movies.genre._id,
-          numberInStock: movies.dailyRentalRate,
-          dailyRentalRate: movies.numberInStock,
-          liked: movies.liked,
+          genreID: movies.genreID,
+          numberInStock: movies.numberInStock,
+          dailyRentalRate: movies.dailyRentalRate,
         },
       });
     }
   }
   doSubmit() {
-    console.log(this.state.data);
+    //console.log(this.state.data);
     saveMovie(this.state.data);
     this.props.history.replace("/movies");
   }
@@ -56,7 +58,7 @@ class MovieForm extends Form {
         <h1>Movie Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInputField("title", "Movie Title")}
-          {this.renderSelectMenu("genreId", "Genre", this.state.genres)}
+          {this.renderSelectMenu("genreID", "Genre", this.state.genres)}
           {this.renderInputField("numberInStock", "Number in stock")}
           {this.renderInputField("dailyRentalRate", "Daily rental rate")}
           {this.renderButton("Save Movie")}

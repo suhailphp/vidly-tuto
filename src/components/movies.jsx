@@ -27,7 +27,7 @@ class Movies extends Component {
   async componentDidMount() {
     let movies = await http.get(config.ApiEndPoint + "movies");
     let genres = await http.get(config.ApiEndPoint + "genre");
-    console.log(movies);
+    //console.log(movies);
     genres = [{ genreID: "", name: "All Movies" }, ...genres.data];
     this.setState({
       movies: movies.data,
@@ -58,7 +58,7 @@ class Movies extends Component {
   };
   handleGenreSelect = (selectedGenre) => {
     this.setState({
-      selectedGenre: selectedGenre._id ? selectedGenre : null,
+      selectedGenre: selectedGenre.genreID ? selectedGenre : null,
       currentPage: 1,
       search: "",
     });
@@ -77,7 +77,9 @@ class Movies extends Component {
       search,
     } = this.state;
     const filtered = selectedGenre
-      ? allMovies.filter((movie) => selectedGenre._id === movie.genre._id)
+      ? allMovies.filter(
+          (movie) => selectedGenre.genreID === movie.Genre.genreID
+        )
       : allMovies;
 
     const searched =

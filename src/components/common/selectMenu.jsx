@@ -1,6 +1,14 @@
 import React from "react";
 
-const SelectMenu = ({ name, label, error, options, onChange, value }) => {
+const SelectMenu = ({
+  name,
+  label,
+  error,
+  options,
+  onChange,
+  value,
+  valueProperty,
+}) => {
   return (
     <div className="form-group">
       <label htmlFor="{id}">{label}</label>
@@ -13,7 +21,7 @@ const SelectMenu = ({ name, label, error, options, onChange, value }) => {
       >
         <option value="">Select One</option>
         {options.map((option) => (
-          <option key={option._id} value={option._id}>
+          <option key={option[valueProperty]} value={option[valueProperty]}>
             {option.name}
           </option>
         ))}
@@ -21,6 +29,10 @@ const SelectMenu = ({ name, label, error, options, onChange, value }) => {
       {error && <div className="alert alert-danger">{error}</div>}
     </div>
   );
+};
+
+SelectMenu.defaultProps = {
+  valueProperty: "genreID",
 };
 
 export default SelectMenu;
