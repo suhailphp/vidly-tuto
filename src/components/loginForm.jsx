@@ -21,6 +21,8 @@ class LoginForm extends Form {
         this.state.data.password
       );
       localStorage.setItem("token", jwt);
+      toast.success("user Login Successfully");
+      this.props.history.replace("/");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         toast.error(ex.response.data);
