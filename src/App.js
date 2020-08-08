@@ -16,10 +16,12 @@ import jwtDecode from "jwt-decode";
 class App extends Component {
   state = {};
   componentDidMount() {
-    const jwt = localStorage.getItem("token");
-    let user = jwtDecode(jwt);
-    this.setState({ user });
-    console.log(user);
+    try {
+      const jwt = localStorage.getItem("token");
+      let user = jwtDecode(jwt);
+      this.setState({ user });
+      console.log(user);
+    } catch (ex) {}
   }
   render() {
     return (
