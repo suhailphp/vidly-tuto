@@ -13,6 +13,7 @@ import RegisterForm from "./components/registerForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import jwtDecode from "jwt-decode";
+import Logout from "./components/logout";
 class App extends Component {
   state = {};
   componentDidMount() {
@@ -20,7 +21,6 @@ class App extends Component {
       const jwt = localStorage.getItem("token");
       let user = jwtDecode(jwt);
       this.setState({ user });
-      console.log(user);
     } catch (ex) {}
   }
   render() {
@@ -31,6 +31,7 @@ class App extends Component {
         <main className="container">
           <Switch>
             <Route path="/login" component={LoginForm} />
+            <Route path="/logout" component={Logout} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/movies/:_id" component={MovieForm} />
             <Route path="/movies" component={Movies} />
