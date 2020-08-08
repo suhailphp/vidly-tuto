@@ -3,6 +3,7 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import { registerUser } from "../services/userService";
 import { toast } from "react-toastify";
+import { loginWithJwt } from "../services/authService";
 
 class RegisterForm extends Form {
   state = {
@@ -18,7 +19,7 @@ class RegisterForm extends Form {
     try {
       let response = await registerUser(this.state.data);
       toast.success("User Registered");
-      localStorage.setItem("token", response.headers["x-auth-token"]);
+      loginWithJwt(response.headers["x-auth-token"]);
       window.location = "/";
     } catch (error) {
       let errors = { ...this.state.errors };
