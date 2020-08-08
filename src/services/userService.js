@@ -9,6 +9,10 @@ export function registerUser(user) {
   return http.post(endPoint, user);
 }
 
+export function login(email, password) {
+  return http.post(endPoint + "/auth", { email, password });
+}
+
 // export function getUsers() {
 //   return http.get(endPoint);
 // }

@@ -1,19 +1,25 @@
 import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
+import { login } from "../services/userService";
+import { toast } from "react-toastify";
 
 class LoginForm extends Form {
   state = {
-    data: { userName: "", password: "" },
+    data: { email: "", password: "" },
     errors: {},
   };
   schema = {
-    userName: Joi.string().required().min(3).max(10).label("User Name"),
+    email: Joi.string().email().required().label("Email"),
     password: Joi.string().required().label("Passowrd"),
   };
 
-  doSubmit = () => {
-    console.log("Submitd");
+  doSubmit = async () => {
+    try {
+      await login(this.state.data.email, this.state.data.password);
+    } catch (error) {
+      toast.error(error.response.data);
+    }
   };
 
   render() {
@@ -21,7 +27,7 @@ class LoginForm extends Form {
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInputField("userName", "User Name")}
+          {this.renderInputField("email", "Email")}
           {this.renderInputField("password", "Password", "password")}
           {this.renderButton("Login")}
         </form>
