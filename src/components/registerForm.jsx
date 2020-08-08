@@ -19,7 +19,7 @@ class RegisterForm extends Form {
       let response = await registerUser(this.state.data);
       toast.success("User Registered");
       localStorage.setItem("token", response.headers["x-auth-token"]);
-      this.props.history.replace("/");
+      window.location = "/";
     } catch (error) {
       let errors = { ...this.state.errors };
       errors.email = error.response.data;
