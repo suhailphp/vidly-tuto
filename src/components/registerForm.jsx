@@ -9,7 +9,7 @@ class RegisterForm extends Form {
   };
   schema = {
     userName: Joi.string().email().required(),
-    password: Joi.string().min(5).required(),
+    password: Joi.string().min(4).required(),
     name: Joi.string().required(),
   };
   doSubmit = () => {
