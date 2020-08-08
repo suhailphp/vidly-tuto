@@ -13,6 +13,7 @@ axios.interceptors.response.use(
       error.response.status >= 400 &&
       error.response.status < 500;
     if (!expectedError) {
+      console.log("hia");
       toast.error("Unexpected error occured, please try again");
       logger.log(error);
     }
