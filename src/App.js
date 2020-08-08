@@ -12,16 +12,13 @@ import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import jwtDecode from "jwt-decode";
 import Logout from "./components/logout";
+import { getCurrentUser } from "./services/authService";
 class App extends Component {
   state = {};
   componentDidMount() {
-    try {
-      const jwt = localStorage.getItem("token");
-      let user = jwtDecode(jwt);
-      this.setState({ user });
-    } catch (ex) {}
+    let user = getCurrentUser();
+    this.setState({ user });
   }
   render() {
     return (
