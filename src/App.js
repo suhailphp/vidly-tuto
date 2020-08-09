@@ -30,7 +30,13 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={RegisterForm} />
-            <Route path="/movies/:_id" component={MovieForm} />
+            <Route
+              path="/movies/:_id"
+              render={(props) => {
+                if (!this.state.user) return <Redirect to="/login" />;
+                return <MovieForm {...props} />;
+              }}
+            />
             <Route
               path="/movies"
               render={(props) => <Movies {...props} user={this.state.user} />}
