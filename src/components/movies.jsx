@@ -119,6 +119,8 @@ class Movies extends Component {
     } = this.state;
     let { movies, totalCount } = this.getPageData();
 
+    let { user } = this.props;
+
     return (
       <div className="row">
         <div className="col-2">
@@ -131,9 +133,12 @@ class Movies extends Component {
         </div>
 
         <div className="col-10">
-          <Link to="/movies/new" className="btn btn-success">
-            New Move
-          </Link>
+          {user && (
+            <Link to="/movies/new" className="btn btn-success">
+              New Move
+            </Link>
+          )}
+
           <p>Total {totalCount} Records</p>
           <Input
             name="search"
