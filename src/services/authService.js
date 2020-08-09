@@ -1,7 +1,6 @@
 import http from "./httpService";
-import { ApiEndPoint } from "../config.json";
 import jwtDecode from "jwt-decode";
-let endPoint = ApiEndPoint + "user/auth";
+let endPoint = "user/auth";
 let tokenKey = "token";
 
 export async function login(email, password) {

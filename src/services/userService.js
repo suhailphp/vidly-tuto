@@ -1,6 +1,6 @@
 import http from "./httpService";
-import { ApiEndPoint } from "../config.json";
-let endPoint = ApiEndPoint + "user";
+
+let endPoint = "user";
 
 export function registerUser(user) {
   if (user.UserID) {

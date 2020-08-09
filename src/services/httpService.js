@@ -3,6 +3,9 @@ import { toast } from "react-toastify";
 import logger from "../services/logService";
 import { getJwt } from "./authService";
 
+//setting base url
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 //setting default headers for secured api end point .
 axios.defaults.headers.common["x-auth-token"] = getJwt();
 //this function for take all unexpected error Gobally. then no need to repeat everywhere
