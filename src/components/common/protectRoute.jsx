@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { getCurrentUser } from "../../services/authService";
 
-const ProtectRoute = ({ path, Component: component, render, ...rest }) => {
+const ProtectRoute = ({ path, component: Component, render, ...rest }) => {
   let user = getCurrentUser();
   return (
     <Route
@@ -10,7 +10,7 @@ const ProtectRoute = ({ path, Component: component, render, ...rest }) => {
       {...rest}
       render={(props) => {
         if (!user) return <Redirect to="/login" />;
-        return component ? <component {...props} /> : render(props);
+        return Component ? <Component {...props} /> : render(props);
       }}
     />
   );

@@ -32,10 +32,7 @@ class App extends Component {
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={RegisterForm} />
 
-            <ProtectRoute
-              path="/movies/:_id"
-              render={(props) => <MovieForm {...props} />}
-            />
+            <ProtectRoute path="/movies/:_id" component={MovieForm} />
             <Route
               path="/movies"
               render={(props) => <Movies {...props} user={this.state.user} />}
