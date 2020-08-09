@@ -53,6 +53,9 @@ class Movies extends Component {
       if (ex.response && ex.response.status === 404) {
         toast.error("Movie already deleted");
         this.setState({ movies: originalMovies });
+      } else {
+        toast.error(ex.response.data);
+        this.setState({ movies: originalMovies });
       }
     }
   };
