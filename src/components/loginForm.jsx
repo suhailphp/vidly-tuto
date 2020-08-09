@@ -18,7 +18,8 @@ class LoginForm extends Form {
     try {
       await login(this.state.data.email, this.state.data.password);
       toast.success("user Login Successfully");
-      window.location = "/";
+      let { state } = this.props.location;
+      window.location = state ? state.from.pathname : "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         toast.error(ex.response.data);
