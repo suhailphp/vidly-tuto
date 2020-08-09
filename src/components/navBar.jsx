@@ -5,7 +5,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <NavLink to="/" className="navbar-brand">
-        Vidly App
+        {process.env.REACT_APP_NAME}
       </NavLink>
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav">
