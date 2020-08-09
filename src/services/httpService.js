@@ -1,6 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import logger from "../services/logService";
+import { getJwt } from "./authService";
+
+//setting default headers for secured api end point .
+axios.defaults.headers.common["x-auth-token"] = getJwt();
 //this function for take all unexpected error Gobally. then no need to repeat everywhere
 axios.interceptors.response.use(
   (success) => {
@@ -13,7 +17,6 @@ axios.interceptors.response.use(
       error.response.status >= 400 &&
       error.response.status < 500;
     if (!expectedError) {
-      console.log("hia");
       toast.error("Unexpected error occured, please try again");
       logger.log(error);
     }

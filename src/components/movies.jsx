@@ -8,7 +8,6 @@ import ListGroup from "./common/listGroup";
 import Moviestable from "./moviesTable";
 import _ from "lodash";
 import Input from "./common/input";
-
 import { toast } from "react-toastify";
 
 class Movies extends Component {
@@ -23,14 +22,18 @@ class Movies extends Component {
   };
 
   async componentDidMount() {
-    let { data: movies } = await getMovies();
-    let { data: genres } = await getGenres();
-    //console.log(movies);
-    genres = [{ genreID: "", name: "All Movies" }, ...genres];
-    this.setState({
-      movies: movies,
-      genres: genres,
-    });
+    try {
+      let { data: movies } = await getMovies();
+      let { data: genres } = await getGenres();
+      //console.log(movies);
+      genres = [{ genreID: "", name: "All Movies" }, ...genres];
+      this.setState({
+        movies: movies,
+        genres: genres,
+      });
+    } catch (ex) {
+      toast.error(ex.response.data);
+    }
   }
 
   handleSearch = ({ currentTarget: input }) => {
