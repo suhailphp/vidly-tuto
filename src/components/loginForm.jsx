@@ -1,8 +1,9 @@
 import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
-import { login } from "../services/authService";
+import { login, getCurrentUser } from "../services/authService";
 import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
 class LoginForm extends Form {
   state = {
@@ -28,6 +29,7 @@ class LoginForm extends Form {
   };
 
   render() {
+    if (getCurrentUser()) return <Redirect to="/" />;
     return (
       <div>
         <h1>Login</h1>
