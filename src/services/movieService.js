@@ -10,11 +10,9 @@ export function getMovie(id) {
 }
 
 export function saveMovie(movie) {
-  //if it update
   if (movie.movieID) {
     return http.put(endPoint + "/" + movie.movieID, movie);
   }
-  //else new movie
   return http.post(endPoint, movie);
 }
 
